@@ -1,76 +1,108 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>MagischeHeuvel – Minecraft Server</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>My Test Website</title>
+  <!-- Disney‑inspired font (rounded, playful) -->
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap" rel="stylesheet">
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f2f2f2;
-            text-align: center;
-        }
+  <style>
+    /* ---------- Reset ---------- */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Baloo 2', sans-serif;
+      background: #fdfdff;
+      color: #333;
+      line-height: 1.6;
+    }
+    a { text-decoration: none; color: inherit; }
 
-        header {
-            background: #222;
-            color: white;
-            padding: 30px;
-        }
+    /* ---------- Header (Mickey‑ear silhouette) ---------- */
+    header {
+      position: relative;
+      padding: 2rem 1rem;
+      text-align: center;
+      background: linear-gradient(135deg, #ff9a9e, #fecfef);
+      color: #fff;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      top: -40px; left: 50%;
+      transform: translateX(-50%);
+      width: 80px; height: 80px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 0 4px #ff6b6b;   /* “ear‑ring” */
+    }
+    header h1 { font-size: 2.8rem; }
+    header p { margin-top: .5rem; font-size: 1.1rem; opacity: .9; }
 
-        main {
-            padding: 50px;
-        }
+    /* ---------- Main content ---------- */
+    .container { max-width: 860px; margin: 0 auto; padding: 2rem; }
+    .server-badge {
+      display: inline-block;
+      padding: .5rem 1rem;
+      background: #ff6b6b;
+      color: #fff;
+      border-radius: 20px;
+      margin-bottom: 2rem;
+      font-weight: 700;
+    }
+    .features { margin-top: 2rem; }
+    .feature { margin-bottom: 1.5rem; }
+    .feature h3 { font-size: 1.4rem; color: #ff6b6b; margin-bottom: .3rem; }
+    .feature p { color: #555; }
 
-        button {
-            background: #007bff;
-            color: white;
-            border: none;
-            padding: 15px 25px;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #0056b3;
-        }
-
-        #message {
-            margin-top: 20px;
-            font-size: 20px;
-            font-weight: bold;
-        }
-    </style>
+    /* ---------- Footer ---------- */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: #e0e0e0;
+      color: #777;
+      margin-top: 3rem;
+      font-size: .9rem;
+    }
+  </style>
 </head>
 
 <body>
 
-    <header>
-        <h1>🌟 My Test Website</h1>
-        <p>My first website on GitHub!</p>
-    </header>
+<header>
+  <h1>MagischeHeuvel</h1>
+  <p>Your Disney‑flavored Minecraft adventure</p>
+</header>
 
-    <main>
-        <h2>Welcome!</h2>
+<div class="container">
+  <section class="server-badge">🏰 Welcome to MagischeHeuvel!</section>
 
-        <p>This is a simple test website hosted with GitHub Pages.</p>
+  <div class="features">
+    <div class="feature">
+      <h3>🏰 Custom Biomes</h3>
+      <p>Hand‑crafted landscapes inspired by Disney parks – from whimsical gardens to towering castles.</p>
+    </div>
+    <div class="feature">
+      <h3>⚔️ Mini‑games</h3>
+      <p>Parkour races, treasure hunts, and “castle‑capture” battles that feel like a Disney parade.</p>
+    </div>
+    <div class="feature">
+      <h3>🎤 Live Events</h3>
+      <p>Weekly themed nights with music, fireworks, and special guest NPCs.</p>
+    </div>
+  </div>
 
-        <button onclick="showMessage()">Click Me!</button>
+  <p style="margin-top:2rem; text-align:center;">
+    <a href="https://discord.gg/magischeheuvel" target="_blank" style="color:#ff6b6b;">
+      Join our Discord &rarr;
+    </a>
+  </p>
+</div>
 
-        <div id="message"></div>
-    </main>
-
-    <script>
-        function showMessage() {
-            document.getElementById("message").innerText =
-                "🎉 It works!";
-        }
-    </script>
+<footer>
+  &copy; 2026 MagischeHeuvel • A Minecraft server with a sprinkle of Disney magic
+</footer>
 
 </body>
 </html>
-```
