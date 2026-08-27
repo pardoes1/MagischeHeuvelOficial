@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MagischeHeuvel – Minecraft Server</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Disney‑inspired font (playful, rounded) -->
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* --------- Basic reset --------- */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Baloo 2', sans-serif;
+      background: #fdfdff;
+      color: #333;
+      line-height: 1.6;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* --------- Header (Mickey‑ear silhouette) --------- */
+    header {
+      position: relative;
+      padding: 2rem 1rem;
+      text-align: center;
+      background: linear-gradient(135deg, #ff9a9e, #fecfef);
+      color: #fff;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      top: -40px; left: 50%;
+      transform: translateX(-50%);
+      width: 80px; height: 80px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 0 4px #ff6b6b;   /* Mickey ear ring */
+    }
+    header h1 { font-size: 2.8rem; }
+    header p { margin-top: 0.5rem; font-size: 1.1rem; opacity: .9; }
+
+    /* --------- Main content --------- */
+    .container { max-width: 860px; margin: 0 auto; padding: 2rem; }
+    .server-badge {
+      display: inline-block;
+      padding: .5rem 1rem;
+      background: #ff6b6b;
+      color: #fff;
+      border-radius: 20px;
+      margin-bottom: 2rem;
+      font-weight: 700;
+    }
+    .features { margin-top: 2rem; }
+    .feature { margin-bottom: 1.5rem; }
+    .feature h3 { font-size: 1.4rem; color: #ff6b6b; margin-bottom: .3rem; }
+    .feature p { color: #555; }
+
+    /* --------- Footer --------- */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: #e0e0e0;
+      color: #777;
+      margin-top: 3rem;
+      font-size: .9rem;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>MagischeHeuvel</h1>
+  <p>Your Disney‑flavored Minecraft adventure</p>
+</header>
+
+<div class="container">
+  <section class="server-badge">🏰 Welcome to MagischeHeuvel!</section>
+
+  <div class="features">
+    <div class="feature">
+      <h3>🏰 Custom Biomes</h3>
+      <p>Explore hand‑crafted landscapes inspired by Disney parks—from whimsical gardens to towering castles.</p>
+    </div>
+    <div class="feature">
+      <h3>⚔️ Mini‑games</h3>
+      <p>Parkour races, treasure hunts, and “castle‑capture” battles that feel like a Disney parade.</p>
+    </div>
+    <div class="feature">
+      <h3>🎤 Live Events</h3>
+      <p>Weekly themed nights with music, fireworks, and special guest NPCs.</p>
+    </div>
+  </div>
+
+  <p style="margin-top:2rem; text-align:center;">
+    <a href="https://discord.gg/magischeheuvel" target="_blank" style="color:#ff6b6b;">
+      Join our Discord &rarr;
+    </a>
+  </p>
+</div>
+
+<footer>
+  &copy; 2026 MagischeHeuvel • A Minecraft server with a sprinkle of Disney magic
+</footer>
+
+</body>
+</html>
