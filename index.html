@@ -1,11 +1,122 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
-  <meta charset="UTF-8">
-  <title>MagischeHeuvel</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Magische Heuvel — Officiële website</title>
+  <style>
+    :root{--bg:#0f1724;--card:#0b1220;--accent:#7dd3fc;--muted:#94a3b8;color-scheme:dark}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;background:linear-gradient(180deg,#071029 0%, var(--bg) 100%);color:#e6eef8;min-height:100vh;display:flex;flex-direction:column}
+    header{padding:1rem 1.25rem;border-bottom:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;gap:1rem}
+    .brand{font-weight:700;font-size:1.125rem}
+    nav{margin-left:auto}
+    nav a{color:var(--muted);text-decoration:none;margin-left:1rem}
+    main{max-width:900px;margin:2rem auto;padding:1rem;width:100%}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);padding:1.25rem;border-radius:8px}
+    .hero{display:grid;gap:1rem}
+    h1{margin:0;font-size:1.75rem}
+    p.lead{color:var(--muted);margin:0}
+    form{display:flex;gap:.5rem;margin-top:1rem}
+    input[type=text]{flex:1;padding:.5rem;border-radius:6px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:inherit}
+    button{padding:.5rem .75rem;border-radius:6px;border:none;background:var(--accent);color:#041025;font-weight:600;cursor:pointer}
+    footer{margin-top:auto;padding:1rem;text-align:center;color:var(--muted);font-size:.9rem}
+    .status{margin-top:1rem}
+    .kv{display:flex;gap:1rem;flex-wrap:wrap}
+    .kv div{background:rgba(255,255,255,0.02);padding:.5rem .75rem;border-radius:6px}
+    @media(min-width:700px){main{margin:3rem auto}}
+  </style>
 </head>
 <body>
-  <h1>Welcome to MagischeHeuvel</h1>
-  <p>Your Minecraft server website.</p>
+  <header>
+    <div class="brand">MagischeHeuvel</div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#server">Server</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="card hero">
+      <div>
+        <h1>Welkom bij MagischeHeuvel</h1>
+        <p class="lead">De officiële website voor onze Minecraft-server. Controleer de serverstatus hieronder of deel de IP om te verbinden.</p>
+      </div>
+
+      <div id="server" class="card">
+        <h2 style="margin-top:0">Serverstatus checker</h2>
+        <p class="lead">Vul het serveradres (bijv. play.magischeheuvel.nl of een IP: 123.45.67.89:25565) en klik op Controleer.</p>
+        <form id="statusForm">
+          <input id="serverInput" type="text" placeholder="Server IP of hostname" aria-label="Server IP or hostname" required />
+          <button type="submit">Controleer</button>
+        </form>
+
+        <div id="status" class="status" aria-live="polite" style="display:none">
+          <div class="kv">
+            <div id="online"><strong>Online:</strong> <span>—</span></div>
+            <div id="players"><strong>Spelers:</strong> <span>—</span></div>
+            <div id="version"><strong>Versie:</strong> <span>—</span></div>
+          </div>
+          <pre id="raw" style="margin-top:1rem;white-space:pre-wrap;background:rgba(255,255,255,0.02);padding:.75rem;border-radius:6px;overflow:auto;max-height:220px"></pre>
+        </div>
+      </div>
+
+      <div id="contact" class="card">
+        <h2 style="margin-top:0">Contact</h2>
+        <p class="lead">Heb je vragen of wil je meedoen? Voeg een contactoptie toe of open een issue op de GitHub-repository.</p>
+        <p style="margin:0.5rem 0">Repository: <a href="https://github.com/pardoes1/MagischeHeuvelOficial" target="_blank" rel="noopener" style="color:var(--accent)">pardoes1/MagischeHeuvelOficial</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span id="year"></span> MagischeHeuvel — Alle rechten voorbehouden
+  </footer>
+
+  <script>
+    // Simple client-side Minecraft server status check using mcsrvstat.us (public API)
+    const form = document.getElementById('statusForm');
+    const input = document.getElementById('serverInput');
+    const statusEl = document.getElementById('status');
+    const onlineEl = document.getElementById('online').querySelector('span');
+    const playersEl = document.getElementById('players').querySelector('span');
+    const versionEl = document.getElementById('version').querySelector('span');
+    const rawEl = document.getElementById('raw');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const host = input.value.trim();
+      if (!host) return;
+      statusEl.style.display = '';
+      onlineEl.textContent = 'Controleren...';
+      playersEl.textContent = '—';
+      versionEl.textContent = '—';
+      rawEl.textContent = '';
+
+      try {
+        const res = await fetch('https://api.mcsrvstat.us/2/' + encodeURIComponent(host));
+        if (!res.ok) throw new Error('Netwerkfout: ' + res.status);
+        const data = await res.json();
+        // Update UI
+        onlineEl.textContent = data.online ? 'Ja' : 'Nee';
+        if (data.players) {
+          const onlineCount = data.players.online ?? '0';
+          const max = data.players.max ?? '—';
+          playersEl.textContent = onlineCount + (max ? ' / ' + max : '');
+        } else {
+          playersEl.textContent = '—';
+        }
+        versionEl.textContent = data.version ?? (data.software ?? '—');
+        rawEl.textContent = JSON.stringify(data, null, 2);
+      } catch (err) {
+        onlineEl.textContent = 'Fout';
+        rawEl.textContent = String(err);
+      }
+    });
+
+    // Fill year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
